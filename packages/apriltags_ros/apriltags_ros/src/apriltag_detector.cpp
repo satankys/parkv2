@@ -101,9 +101,11 @@ namespace apriltags_ros{
       tag_pose.header = cv_ptr->header;
 
       duckietown_msgs::AprilTagDetection tag_detection;
-      tag_detection.pose = tag_pose;
-      tag_detection.id = detection.id;
-      tag_detection.size = tag_size;
+      tag_detection.transform.translation.x = tag_pose.pose.position.x;
+      tag_detection.tag_id = detection.id;
+      tag_detection.transform.translation.y = tag_pose.pose.position.y;
+      tag_detection.transform.translation.z = tag_pose.pose.position.z;
+      tag_detection.transform.rotation = tag_pose.pose.orientation;
       tag_detection_array.detections.push_back(tag_detection);
       tag_pose_array.poses.push_back(tag_pose.pose);
 
